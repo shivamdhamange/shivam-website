@@ -1,0 +1,594 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: white;
+
+    background:
+        radial-gradient(circle at 20% 20%, #ffb6c9, transparent 30%),
+        radial-gradient(circle at 80% 80%, #d8b4fe, transparent 30%),
+        linear-gradient(135deg, #ff5f9e, #ff8fab, #b983ff);
+
+    background-size: 200% 200%;
+    animation: backgroundMove 10s ease infinite;
+}
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.container {
+    width: 100%;
+    max-width: 720px;
+    padding: 20px;
+    position: relative;
+    z-index: 10;
+}
+
+/* =========================
+   GLASS CARD
+========================= */
+
+.card {
+    position: relative;
+    padding: 45px 35px;
+
+    text-align: center;
+
+    border-radius: 35px;
+
+    border: 1px solid rgba(255,255,255,0.35);
+
+    background: rgba(255,255,255,0.16);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 30px 70px rgba(0,0,0,0.25),
+        inset 0 0 30px rgba(255,255,255,0.1);
+
+    animation: cardEntrance 1.3s cubic-bezier(.17,.67,.35,1.3);
+}
+
+/* Shining border */
+
+.card::before {
+    content: "";
+
+    position: absolute;
+
+    inset: -2px;
+
+    border-radius: 35px;
+
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,.7),
+        transparent
+    );
+
+    opacity: .5;
+
+    z-index: -1;
+
+    animation: borderShine 4s linear infinite;
+}
+
+/* =========================
+   HEART
+========================= */
+
+.heart {
+    font-size: 75px;
+
+    display: inline-block;
+
+    filter:
+        drop-shadow(0 0 10px rgba(255,0,80,.5))
+        drop-shadow(0 0 25px rgba(255,0,100,.4));
+
+    animation:
+        heartbeat 1.2s infinite,
+        heartFloat 3s ease-in-out infinite;
+}
+
+/* =========================
+   HEADING
+========================= */
+
+h1 {
+    font-size: 58px;
+
+    margin-top: 5px;
+    margin-bottom: 10px;
+
+    background: linear-gradient(
+        90deg,
+        #fff,
+        #ffd6e5,
+        #fff
+    );
+
+    background-size: 200%;
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation:
+        textShine 3s linear infinite,
+        titleAppear 1.5s ease;
+}
+
+.subtitle {
+    font-size: 21px;
+
+    opacity: 0;
+
+    animation: fadeUp 1s ease 0.5s forwards;
+}
+
+/* =========================
+   MESSAGE
+========================= */
+
+.message {
+    max-width: 580px;
+
+    margin: 28px auto 0;
+
+    font-size: 17px;
+
+    line-height: 1.8;
+}
+
+.message p {
+    margin-bottom: 15px;
+
+    opacity: 0;
+
+    animation: fadeUp 1s ease forwards;
+}
+
+.message p:nth-child(1) {
+    animation-delay: .8s;
+}
+
+.message p:nth-child(2) {
+    animation-delay: 1.1s;
+}
+
+.message p:nth-child(3) {
+    animation-delay: 1.4s;
+}
+
+/* =========================
+   QUESTION
+========================= */
+
+h2 {
+    margin-top: 30px;
+    margin-bottom: 25px;
+
+    font-size: 26px;
+
+    opacity: 0;
+
+    animation: fadeUp 1s ease 1.7s forwards;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.buttons {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 20px;
+
+    min-height: 60px;
+
+    opacity: 0;
+
+    animation: fadeUp 1s ease 2s forwards;
+}
+
+button {
+    border: none;
+
+    padding: 15px 32px;
+
+    border-radius: 50px;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        transform .3s,
+        box-shadow .3s;
+}
+
+.yes-btn {
+    color: #ff3975;
+
+    background: white;
+
+    box-shadow:
+        0 0 15px rgba(255,255,255,.5),
+        0 10px 25px rgba(0,0,0,.2);
+
+    animation: buttonPulse 2s infinite;
+}
+
+.yes-btn:hover {
+    transform: scale(1.12);
+
+    box-shadow:
+        0 0 30px rgba(255,255,255,.9),
+        0 10px 30px rgba(0,0,0,.25);
+}
+
+.no-btn {
+    color: white;
+
+    background: rgba(255,255,255,.2);
+
+    border: 1px solid rgba(255,255,255,.4);
+}
+
+.no-btn:hover {
+    transform: scale(.95);
+}
+
+/* =========================
+   FINAL MESSAGE
+========================= */
+
+.final-message {
+    margin-top: 25px;
+
+    font-size: 23px;
+
+    font-weight: bold;
+
+    line-height: 1.6;
+
+    min-height: 40px;
+
+    animation: finalAppear .8s ease;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+    text-align: center;
+
+    margin-top: 20px;
+
+    font-size: 13px;
+
+    opacity: .8;
+}
+
+/* =========================
+   FLOATING HEARTS
+========================= */
+
+.floating-heart {
+    position: fixed;
+
+    bottom: -60px;
+
+    pointer-events: none;
+
+    z-index: 1;
+
+    animation:
+        floatUp linear forwards;
+}
+
+/* =========================
+   SPARKLES
+========================= */
+
+.sparkle {
+    position: fixed;
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    box-shadow:
+        0 0 10px white,
+        0 0 20px white;
+
+    pointer-events: none;
+
+    animation: sparkleFloat linear forwards;
+
+    z-index: 2;
+}
+
+/* =========================
+   HEART BURST
+========================= */
+
+.burst-heart {
+    position: fixed;
+
+    pointer-events: none;
+
+    font-size: 25px;
+
+    z-index: 100;
+
+    animation: burst 1.2s ease forwards;
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes backgroundMove {
+
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes cardEntrance {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateY(80px)
+            scale(.75)
+            rotateX(15deg);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1)
+            rotateX(0);
+    }
+}
+
+@keyframes heartbeat {
+
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    15% {
+        transform: scale(1.25);
+    }
+
+    30% {
+        transform: scale(1);
+    }
+
+    45% {
+        transform: scale(1.15);
+    }
+}
+
+@keyframes heartFloat {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes titleAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeUp {
+
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes textShine {
+
+    0% {
+        background-position: 0%;
+    }
+
+    100% {
+        background-position: 200%;
+    }
+}
+
+@keyframes borderShine {
+
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes buttonPulse {
+
+    0%, 100% {
+        box-shadow:
+            0 0 15px rgba(255,255,255,.5);
+    }
+
+    50% {
+        box-shadow:
+            0 0 30px rgba(255,255,255,.9);
+    }
+}
+
+@keyframes floatUp {
+
+    0% {
+        transform:
+            translateY(0)
+            rotate(0deg)
+            scale(.7);
+
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translateY(-115vh)
+            rotate(360deg)
+            scale(1.3);
+
+        opacity: 0;
+    }
+}
+
+@keyframes sparkleFloat {
+
+    0% {
+        transform: translateY(0) scale(0);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        transform:
+            translateY(-100vh)
+            scale(0);
+
+        opacity: 0;
+    }
+}
+
+@keyframes burst {
+
+    0% {
+        opacity: 1;
+        transform: translate(0,0) scale(.5);
+    }
+
+    100% {
+        opacity: 0;
+        transform:
+            translate(
+                var(--x),
+                var(--y)
+            )
+            scale(1.5)
+            rotate(360deg);
+    }
+}
+
+@keyframes finalAppear {
+
+    from {
+        opacity: 0;
+        transform: scale(.5);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .card {
+        padding: 35px 20px;
+    }
+
+    h1 {
+        font-size: 43px;
+    }
+
+    .heart {
+        font-size: 60px;
+    }
+
+    .subtitle {
+        font-size: 18px;
+    }
+
+    .message {
+        font-size: 15px;
+    }
+
+    h2 {
+        font-size: 21px;
+    }
+
+    button {
+        padding: 13px 23px;
+        font-size: 15px;
+    }
+}
